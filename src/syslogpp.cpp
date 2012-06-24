@@ -3,6 +3,8 @@
 #endif
 #include "syslogpp.h"
 
+syslog_t g_syslog;
+
 #ifdef HAVE_PTHREAD
 #include <pthread.h>
 pthread_once_t syslog_once = PTHREAD_ONCE_INIT;

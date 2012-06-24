@@ -31,11 +31,13 @@ public:
 inline                  syslog_t(int prio = LOG_WARNING);
 inline                  ~syslog_t();
 
+//change priority operator
+inline  std::ostream&   operator () (int prio);
+
 //standart interface
 inline  void            open(const char* procname, int option, int facility);
 inline  void            close();
 inline  int             setmask(int mask);
-inline  std::ostream&   operator () (int prio);
 inline  void            operator () (int prio, const char* fmt, ...) const;
 };
 
