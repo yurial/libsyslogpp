@@ -3,11 +3,11 @@ NAME
 
 SYNOPSIS
     #include <syslogpp.h>
-    Link with -lsyslogpp or with -lsyslogpp -lpthread if you build library with multi-threading support.
+    Link with -lsyslogpp or with -lsyslogpp_r -pthread if you build library with multi-threading support.
 
     For defining keywords you can put them to config.h file and define HAVE_CONFIG_H keyword or set to make flags manually. For including standard syslog mechanism define HAVE_SYSLOG keyword. (else you should provide your owns syslog functions same as openlog, closelog, syslog, setlogmask )
 
-    libsyslogpp is a thread-safe library. Library provides a buffer for each thread. These messages don't mix up in output sequence it is guaranteed. If your program use more than one thread, define HAVE_PTHREAD keyword to enable thread-safe mechanism.
+    libsyslogpp_r is a thread-safe library. Library provides a buffer for each thread. These messages don't mix up in output sequence it is guaranteed.
 
     class syslog_t:
         protected syslogbuf,
@@ -30,16 +30,19 @@ SYNOPSIS
 STANDARD INTERFACE
     Standard interface contains overriding of the standard syslog definition and preserves the compatibility with standard interface:
 
-    syslog.open( "name", LOG_PID, LOG_DAEMON );
-    syslog.setmask( LOG_UPTO( LOG_DEBUG ) );
+    openlog( "name", LOG_PID, LOG_DAEMON );
+    setlogmask( LOG_UPTO( LOG_DEBUG ) );
     syslog( LOG_DEBUG, "%s", "test message" );
-    syslog.close();
+    closelog();
 
 STREAM INTERFACE
     syslog class derived from std::ostream and provide a standard stream interface:
+    syslog.open( "name", LOG_PID, LOG_DAEMON );
+    syslog.setmask( LOG_UPTO( LOG_DEBUG ) ); 
     syslog << "test message" << std::endl;
+    syslog.close();
 
-    Synchronization is called automatically by any standard handler for which it's specific (std::endl, std::flush) or by directed call of method flush(); Data which has been redirected to syslog remain in buffer till synchronization. 
+    Data which has been redirected to syslog remain in buffer till synchronization. Synchronization is called automatically by any standard handler for which it's specific (std::endl, std::flush) or by directed call of method flush();
 
     You should call operator () for change of a message's priority:
     syslog( LOG_DEBUG );
@@ -51,7 +54,7 @@ STREAM INTERFACE
 
     The change priority operator can flush buffer and transmit data to syslog with previous priority.
     syslog( LOG_DEBUG ) << "message1";
-    syslog( LOG_NOTICE ) << "message2" << std::endl;
+    syslog( LOG_NOTICE ) << "message2" << std::endl; //send "message1" with prioryti LOG_DEBUG and "message2" with priority LOG_NOTICE.
 
     You can substitute standard behavior of the predetermined stream output object same as std::cout, std::cerr and std::clog:
     #include <stdlib.h>
