@@ -15521,7 +15521,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 # Check whether --enable-debug was given.
 if test "${enable_debug+set}" = set; then :
-  enableval=$enable_debug; export CXXFLAGS="-O0 -g"
+  enableval=$enable_debug; export CXXFLAGS="-O0 -g ${CXXFLAGS}"
 fi
 
 
