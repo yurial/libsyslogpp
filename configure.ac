@@ -7,14 +7,11 @@ AC_C_INLINE
 AC_PROG_CXX
 AC_PROG_LIBTOOL
 AC_CHECK_HEADER( [syslog.h], [AC_DEFINE(HAVE_SYSLOG,1,[Define if you have syslog.h header file.])] )
-AC_ARG_ENABLE([debug],AS_HELP_STRING(--enable-debug,enable debug), export CXXFLAGS="-O0 -g")
-AC_ARG_ENABLE([pthread],AS_HELP_STRING(--enable-pthread,enable pthread support), 
-    [ACX_PTHREAD( [AC_DEFINE(HAVE_PTHREAD,1,[Define if you have POSIX threads libraries and header files.])],[pthread not supported, configure program with --disable-pthread])]
-    )
+ACX_PTHREAD([export BUILD_LIBS="libsyslogpp.a libsyslogpp_r.a"],[export BUILD_LIBS="libsyslogpp.a"])
 
-LIBS="$PTHREAD_LIBS $LIBS"
-CXXFLAGS="$CXXFLAGS $PTHREAD_CFLAGS"
+AC_ARG_ENABLE([debug],[AS_HELP_STRING(--enable-debug,enable debug)],[export CXXFLAGS="-O0 -g"])
 
+AC_SUBST([BUILD_LIBS])
 AC_CONFIG_HEADERS(src/config.h)
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

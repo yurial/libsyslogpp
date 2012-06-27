@@ -1,5 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
-lib_LIBRARIES = libsyslogpp.a libsyslogpp_r.a
+lib_LIBRARIES = @BUILD_LIBS@
+EXTRA_LIBRARIES = libsyslogpp.a libsyslogpp_r.a
 libsyslogpp_a_SOURCES = src/syslogpp.cpp
 libsyslogpp_r_a_SOURCES = src/syslogpp_r.cpp
 library_includedir=$(includedir)/
