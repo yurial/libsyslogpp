@@ -2,10 +2,10 @@ AC_INIT([syslogpp],[0.2])
 AM_INIT_AUTOMAKE([syslogpp],[0.2])
 AC_CONFIG_MACRO_DIR([m4])
 m4_include([m4/acx_pthread.m4])
+: ${CXXFLAGS="-O3 -Wall"}
 AC_C_INLINE
 AC_PROG_CXX
 AC_PROG_LIBTOOL
-CXXFLAGS=-O3
 AC_CHECK_HEADER( [syslog.h], [AC_DEFINE(HAVE_SYSLOG,1,[Define if you have syslog.h header file.])] )
 AC_ARG_ENABLE([debug],AS_HELP_STRING(--enable-debug,enable debug), export CXXFLAGS="-O0 -g")
 AC_ARG_ENABLE([pthread],AS_HELP_STRING(--enable-pthread,enable pthread support), 

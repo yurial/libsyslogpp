@@ -10,6 +10,7 @@
 #endif
 
 #include <stdarg.h>
+#include <stdexcept>
 #include <sstream>
 
 class syslogbuf:
@@ -61,6 +62,7 @@ if ( epptr() != str )
     syslog( m_prio, "%s", str );
     setp( str, str );
     }
+return 0; //success
 }
 
 syslog_t::syslog_t(int prio):
@@ -91,6 +93,7 @@ return setlogmask( mask );
 std::ostream& syslog_t::operator () (const int prio)
 {
 setprio( prio );
+return *this;
 }
 
 void syslog_t::operator () (int prio, const char* fmt, ...) const
@@ -101,13 +104,8 @@ vsyslog( prio, fmt, args );
 va_end( args );
 }
 
-#ifndef HAVE_PTHREAD
-    extern syslog_t g_syslog;
-    #define syslog g_syslog
-#else
-    syslog_t& syslog_get();
-    #define syslog syslog_get()
-#endif
+syslog_t& syslog_get() throw(std::bad_alloc,std::runtime_error);
+#define syslog syslog_get()
 
 #endif
 

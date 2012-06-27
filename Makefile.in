@@ -79,11 +79,14 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(man7dir)" \
 	"$(DESTDIR)$(library_includedir)"
 LIBRARIES = $(lib_LIBRARIES)
 ARFLAGS = cru
-libsyslogpp_@PACKAGE_VERSION@_a_AR = $(AR) $(ARFLAGS)
-libsyslogpp_@PACKAGE_VERSION@_a_LIBADD =
-am_libsyslogpp_@PACKAGE_VERSION@_a_OBJECTS = syslogpp.$(OBJEXT)
-libsyslogpp_@PACKAGE_VERSION@_a_OBJECTS =  \
-	$(am_libsyslogpp_@PACKAGE_VERSION@_a_OBJECTS)
+libsyslogpp_a_AR = $(AR) $(ARFLAGS)
+libsyslogpp_a_LIBADD =
+am_libsyslogpp_a_OBJECTS = syslogpp.$(OBJEXT)
+libsyslogpp_a_OBJECTS = $(am_libsyslogpp_a_OBJECTS)
+libsyslogpp_r_a_AR = $(AR) $(ARFLAGS)
+libsyslogpp_r_a_LIBADD =
+am_libsyslogpp_r_a_OBJECTS = syslogpp_r.$(OBJEXT)
+libsyslogpp_r_a_OBJECTS = $(am_libsyslogpp_r_a_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/src
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -97,8 +100,8 @@ CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(libsyslogpp_@PACKAGE_VERSION@_a_SOURCES)
-DIST_SOURCES = $(libsyslogpp_@PACKAGE_VERSION@_a_SOURCES)
+SOURCES = $(libsyslogpp_a_SOURCES) $(libsyslogpp_r_a_SOURCES)
+DIST_SOURCES = $(libsyslogpp_a_SOURCES) $(libsyslogpp_r_a_SOURCES)
 man7dir = $(mandir)/man7
 NROFF = nroff
 MANS = $(man_MANS)
@@ -239,8 +242,9 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4
-lib_LIBRARIES = libsyslogpp-@PACKAGE_VERSION@.a
-libsyslogpp_@PACKAGE_VERSION@_a_SOURCES = src/syslogpp.cpp
+lib_LIBRARIES = libsyslogpp.a libsyslogpp_r.a
+libsyslogpp_a_SOURCES = src/syslogpp.cpp
+libsyslogpp_r_a_SOURCES = src/syslogpp_r.cpp
 library_includedir = $(includedir)/
 library_include_HEADERS = src/syslogpp.h
 man_MANS = man/libsyslogpp.7
@@ -331,10 +335,14 @@ uninstall-libLIBRARIES:
 
 clean-libLIBRARIES:
 	-test -z "$(lib_LIBRARIES)" || rm -f $(lib_LIBRARIES)
-libsyslogpp-@PACKAGE_VERSION@.a: $(libsyslogpp_@PACKAGE_VERSION@_a_OBJECTS) $(libsyslogpp_@PACKAGE_VERSION@_a_DEPENDENCIES) 
-	-rm -f libsyslogpp-@PACKAGE_VERSION@.a
-	$(libsyslogpp_@PACKAGE_VERSION@_a_AR) libsyslogpp-@PACKAGE_VERSION@.a $(libsyslogpp_@PACKAGE_VERSION@_a_OBJECTS) $(libsyslogpp_@PACKAGE_VERSION@_a_LIBADD)
-	$(RANLIB) libsyslogpp-@PACKAGE_VERSION@.a
+libsyslogpp.a: $(libsyslogpp_a_OBJECTS) $(libsyslogpp_a_DEPENDENCIES) 
+	-rm -f libsyslogpp.a
+	$(libsyslogpp_a_AR) libsyslogpp.a $(libsyslogpp_a_OBJECTS) $(libsyslogpp_a_LIBADD)
+	$(RANLIB) libsyslogpp.a
+libsyslogpp_r.a: $(libsyslogpp_r_a_OBJECTS) $(libsyslogpp_r_a_DEPENDENCIES) 
+	-rm -f libsyslogpp_r.a
+	$(libsyslogpp_r_a_AR) libsyslogpp_r.a $(libsyslogpp_r_a_OBJECTS) $(libsyslogpp_r_a_LIBADD)
+	$(RANLIB) libsyslogpp_r.a
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -343,6 +351,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/syslogpp.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/syslogpp_r.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -378,6 +387,20 @@ syslogpp.obj: src/syslogpp.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/syslogpp.cpp' object='syslogpp.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o syslogpp.obj `if test -f 'src/syslogpp.cpp'; then $(CYGPATH_W) 'src/syslogpp.cpp'; else $(CYGPATH_W) '$(srcdir)/src/syslogpp.cpp'; fi`
+
+syslogpp_r.o: src/syslogpp_r.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT syslogpp_r.o -MD -MP -MF $(DEPDIR)/syslogpp_r.Tpo -c -o syslogpp_r.o `test -f 'src/syslogpp_r.cpp' || echo '$(srcdir)/'`src/syslogpp_r.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/syslogpp_r.Tpo $(DEPDIR)/syslogpp_r.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/syslogpp_r.cpp' object='syslogpp_r.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o syslogpp_r.o `test -f 'src/syslogpp_r.cpp' || echo '$(srcdir)/'`src/syslogpp_r.cpp
+
+syslogpp_r.obj: src/syslogpp_r.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT syslogpp_r.obj -MD -MP -MF $(DEPDIR)/syslogpp_r.Tpo -c -o syslogpp_r.obj `if test -f 'src/syslogpp_r.cpp'; then $(CYGPATH_W) 'src/syslogpp_r.cpp'; else $(CYGPATH_W) '$(srcdir)/src/syslogpp_r.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/syslogpp_r.Tpo $(DEPDIR)/syslogpp_r.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/syslogpp_r.cpp' object='syslogpp_r.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o syslogpp_r.obj `if test -f 'src/syslogpp_r.cpp'; then $(CYGPATH_W) 'src/syslogpp_r.cpp'; else $(CYGPATH_W) '$(srcdir)/src/syslogpp_r.cpp'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

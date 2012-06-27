@@ -1,6 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4
-lib_LIBRARIES = libsyslogpp-@PACKAGE_VERSION@.a
-libsyslogpp_@PACKAGE_VERSION@_a_SOURCES = src/syslogpp.cpp
+lib_LIBRARIES = libsyslogpp.a libsyslogpp_r.a
+libsyslogpp_a_SOURCES = src/syslogpp.cpp
+libsyslogpp_r_a_SOURCES = src/syslogpp_r.cpp
 library_includedir=$(includedir)/
 library_include_HEADERS = src/syslogpp.h
 man_MANS = man/libsyslogpp.7

@@ -2830,6 +2830,7 @@ am__tar='${AMTAR} chof - "$$tardir"'; am__untar='${AMTAR} xf -'
 
 
 
+: ${CXXFLAGS="-O3 -Wall"}
 DEPDIR="${am__leading_dot}deps"
 
 ac_config_commands="$ac_config_commands depfiles"
@@ -14990,7 +14991,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 # Only expand once:
 
 
-CXXFLAGS=-O3
 ac_fn_c_check_header_mongrel "$LINENO" "syslog.h" "ac_cv_header_syslog_h" "$ac_includes_default"
 if test "x$ac_cv_header_syslog_h" = xyes; then :
 
