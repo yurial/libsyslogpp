@@ -20,7 +20,7 @@ SYNOPSIS
     //change priority operator
     inline  std::ostream&   operator () (int prio);
 
-    //standart interface
+    //standard interface
     inline  void            open(const char* procname, int option, int facility);
     inline  void            close();
     inline  int             setmask(int mask);
@@ -28,7 +28,7 @@ SYNOPSIS
     };
 
 STANDARD INTERFACE
-    Standart interface contains overriding of the standard syslog definition and preserves the compatibility with standard interface:
+    Standard interface contains overriding of the standard syslog definition and preserves the compatibility with standard interface:
 
     syslog.open( "name", LOG_PID, LOG_DAEMON );
     syslog.setmask( LOG_UPTO( LOG_DEBUG ) );

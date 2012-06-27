@@ -34,7 +34,7 @@ inline                  ~syslog_t();
 //change priority operator
 inline  std::ostream&   operator () (int prio);
 
-//standart interface
+//standard interface
 inline  void            open(const char* procname, int option, int facility);
 inline  void            close();
 inline  int             setmask(int mask);
