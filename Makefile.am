@@ -6,5 +6,5 @@ libsyslogpp_r_a_SOURCES = src/syslogpp_r.cpp
 library_includedir=$(includedir)/
 library_include_HEADERS = src/syslogpp.h
 man_MANS = man/libsyslogpp.7
-dist_noinst_DATA = ebuild src/example.cpp
+EXTRA_DIST = ebuild $(man_MANS) src/example.cpp
 
