@@ -1,1 +1,1 @@
-libsyslogpp-9999.ebuild
+libsyslogpp-0.2.ebuild

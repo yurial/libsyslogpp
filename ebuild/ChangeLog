@@ -1,3 +1,8 @@
+2012-06-28	Yuri Dyachenko <admin@yurial.ru>
+	Version 0.3 released
+	Installation scripts fixed.
+	libsyslogpp splitted to libsyslogpp and libsyslogpp_r.
+
 2012-06-24	Yuri Dyachenko <admin@yurial.ru>
-	Version 0.1 release (initial)
+	Version 0.1 released (initial)
 

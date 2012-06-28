@@ -23,11 +23,11 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="debug +pthread"
+IUSE="debug"
 DEPEND=""
 
 src_configure() {
-	econf $(use_enable debug) $(use_enable pthread)
+	econf $(use_enable debug)
 }
 
 src_compile() {
