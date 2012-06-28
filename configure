@@ -2829,7 +2829,7 @@ am__tar='${AMTAR} chof - "$$tardir"'; am__untar='${AMTAR} xf -'
 
 
 
-: ${CXXFLAGS="-O3 -Wall"}
+: ${CXXFLAGS=""}
 DEPDIR="${am__leading_dot}deps"
 
 ac_config_commands="$ac_config_commands depfiles"
@@ -14993,7 +14993,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 ac_fn_c_check_header_mongrel "$LINENO" "syslog.h" "ac_cv_header_syslog_h" "$ac_includes_default"
 if test "x$ac_cv_header_syslog_h" = xyes; then :
 
-$as_echo "#define HAVE_SYSLOG 1" >>confdefs.h
+$as_echo "#define HAVE_SYSLOG_H 1" >>confdefs.h
 
 fi
 
@@ -15521,9 +15521,12 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 # Check whether --enable-debug was given.
 if test "${enable_debug+set}" = set; then :
-  enableval=$enable_debug; export CXXFLAGS="-O0 -g ${CXXFLAGS}"
+  enableval=$enable_debug;
 fi
 
+if  test "_$enable_debug" = "_yes" ; then
+    CXXFLAGS="-O0 -g ${CXXFLAGS}"
+    fi
 
 
 ac_config_headers="$ac_config_headers src/config.h"

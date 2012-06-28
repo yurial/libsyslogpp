@@ -1,9 +1,12 @@
+#ifdef HAVE_CONFIG_H
+    #include "config.h"
+#endif
+
 #include <pthread.h>
 #include "syslogpp.h"
 
 pthread_once_t syslog_once = PTHREAD_ONCE_INIT;
 pthread_key_t  syslog_key;
-
 
 void syslog_cleanup(void* p)
 {

@@ -1,3 +1,10 @@
+2012-06-28  Yuri Dyachenko <admin@yurial.ru>
+	Version 0.4 released
+	Now config.h not supported in header file.
+	Set default message priority to LOG_ALERT if syslog.h exists,
+	and to 0 if not exists.
+	Fix ./configure --enable-debug.
+
 2012-06-28	Yuri Dyachenko <admin@yurial.ru>
 	Version 0.3 released
 	Installation scripts fixed.

@@ -1,12 +1,24 @@
 #ifndef SYSLOGPP_H
 #define SYSLOGPP_H
 
-#ifdef HAVE_CONFIG_H
-    #include "config.h"
-#endif
-
-#ifdef HAVE_SYSLOG
+#ifdef HAVE_SYSLOG_H
     #include <syslog.h>
+    #ifndef SYSLOGPP_DEFAULT_PRIO
+        #define SYSLOGPP_DEFAULT_PRIO LOG_ALERT
+    #endif
+#else
+    #include <stdarg.h>
+    #ifndef SYSLOGPP_DEFAULT_PRIO
+        #define SYSLOGPP_DEFAULT_PRIO 0
+    #endif
+    extern "C"
+        {
+        void openlog(const char *ident, int option, int facility);
+        void syslog(int priority, const char *format, ...);
+        void closelog(void);
+        void vsyslog(int priority, const char *format, va_list ap);
+        int  setlogmask(int mask);
+        }
 #endif
 
 #include <stdarg.h>
@@ -29,10 +41,10 @@ class syslog_t:
     public std::ostream
 {
 public:
-inline                  syslog_t(int prio = LOG_WARNING);
+inline                  syslog_t(int prio = SYSLOGPP_DEFAULT_PRIO);
 inline                  ~syslog_t();
 
-//change priority operator
+//operator of priority modification
 inline  std::ostream&   operator () (int prio);
 
 //standard interface
