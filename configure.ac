@@ -1,5 +1,5 @@
-AC_INIT([syslogpp],[0.3])
-AM_INIT_AUTOMAKE([syslogpp],[0.3])
+AC_INIT([syslogpp],[0.4])
+AM_INIT_AUTOMAKE([syslogpp],[0.4])
 AC_CONFIG_MACRO_DIR([m4])
 m4_include([m4/acx_pthread.m4])
 : ${CXXFLAGS=""}
