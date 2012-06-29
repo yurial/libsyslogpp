@@ -4,9 +4,9 @@ NAME
 SYNOPSIS
     #include <syslogpp.h>
     Link with -lsyslogpp or with -lsyslogpp_r -pthread if you build library with multi-threading support.
-    libsyslogpp_r is a thread-safe library. Library provides a 'syslog' object for each thread. These messages don't mix up in output sequence, it is guaranteed.
+    libsyslogpp_r is a thread-safe library which provides a 'syslog' object for each thread. These messages with guarantee won't be mixed in proceeding sequence.
 
-    For including standard syslog mechanism define HAVE_SYSLOG_H keyword (else you should provide your owns syslog functions similar to openlog, closelog, syslog, setlogmask ).
+    For including standard syslog mechanism define HAVE_SYSLOG_H keyword (else you should provide yours syslog functions similar to openlog, closelog, syslog, setlogmask ).
     SYSLOGPP_DEFAULT_PRIO define a default messages priority, if HAVE_SYSLOG_H defined set LOG_ALERT else 0.
 
     class syslog_t:
@@ -52,7 +52,7 @@ STREAM INTERFACE
     You can mix changing of messages priority and data redirection: 
     syslog( LOG_DEBUG ) << "test message" << std::endl;
 
-    The operator of priority modification transfers data from internal buffer to syslog with the previous priority before set a new priority value.
+    The operator of priority modification transfers data from internal buffer to syslog with the previous priority before setting a new priority value.
     syslog( LOG_DEBUG ) << "message1";
     syslog( LOG_NOTICE ) << "message2" << std::endl; //send "message1" with priority LOG_DEBUG and "message2" with priority LOG_NOTICE.
 
@@ -71,7 +71,7 @@ STREAM INTERFACE
     return EXIT_SUCCESS;
     }
 
-    The substitution of std::cerr isn't recommended, because it hasn't buffering and sends each message separately.
+    The substitution of std::cerr requires the inclusion of buffering. Use it with std::nounitbuf manipulator else std::cerr will send each message separately.
 
 AUTHORS
     Document written by:

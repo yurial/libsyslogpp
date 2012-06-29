@@ -1,3 +1,8 @@
+2012-06-29	Yuri Dyachenko <admin@yurial.ru>
+	Version 0.5 released
+	More examples in 'examples/'.
+	Fix README.
+
 2012-06-28  Yuri Dyachenko <admin@yurial.ru>
 	Version 0.4 released
 	Now config.h not supported in header file.
