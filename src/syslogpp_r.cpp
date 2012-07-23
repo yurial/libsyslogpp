@@ -22,12 +22,6 @@ if ( 0 != ret )
     {
     throw std::bad_alloc();
     }
-syslog_t* log = new syslog_t;
-ret = pthread_setspecific( syslog_key, log );
-if ( 0 != ret )
-    {
-    throw std::bad_alloc();
-    }
 }
 
 syslog_t& syslog_get() throw(std::bad_alloc,std::runtime_error)
@@ -40,7 +34,13 @@ if ( 0 != ret )
 syslog_t* log = (syslog_t*)pthread_getspecific( syslog_key );
 if ( NULL == log )
     {
-    throw std::runtime_error( "libsyslogpp_r: can't get syslog" );
+    log = new syslog_t;
+    ret = pthread_setspecific( syslog_key, log );
+    if ( 0 != ret )
+        {
+        delete log;
+        throw std::bad_alloc();
+        }
     }
 return *log;
 }
