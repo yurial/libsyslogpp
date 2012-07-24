@@ -1,6 +1,10 @@
+2012-07-24	Yuri Dyachenko <admin@yurial.ru>
+	Version 0.7 released
+	Fix bug with stringbuf memory allocation.
+
 2012-07-23	Yuri Dyachenko <admin@yurial.ru>
 	Version 0.6 released
-	Fix bug with multithread syslog initialization
+	Fix bug with multithread syslog initialization.
 
 2012-06-29	Yuri Dyachenko <admin@yurial.ru>
 	Version 0.5 released

@@ -67,12 +67,12 @@ m_prio = prio;
 
 int syslogbuf::sync()
 {
-char* str = pbase();
-if ( epptr() != str )
+if ( in_avail() )
     {
     sputc( '\0' );
-    syslog( m_prio, "%s", str );
-    setp( str, str );
+    syslog( m_prio, "%s", gptr() );
+    seekoff( 0, std::ios_base::beg, std::ios_base::in | std::ios_base::out );
+    setg( pbase(), pbase(), pbase() );
     }
 return 0; //success
 }
