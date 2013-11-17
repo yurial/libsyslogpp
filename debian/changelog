@@ -1,0 +1,5 @@
+libsyslogpp (0.7) experimental; urgency=optional
+       
+	* initial IOTEO package
+
+ -- Ionut Cotoi <icotoi@gmail.com>  Fri, 15 Nov 2013 19:56:34 +2000
