@@ -1,3 +1,4 @@
+#pragma once
 /*
 libsyslogpp - c++ wrapper for standard syslog interface
 copyright (c) 2013  yuri diachenko
@@ -49,9 +50,13 @@ class syslogbuf:
 protected:
                 int     m_prio;
 
+inline          int     sync();
+public:
 inline                  syslogbuf(int prio);
 inline          void    setprio(int prio);
-inline          int     sync();
+inline          size_t  size() const;
+inline          bool    empty() const;
+inline          void    clear();
 };
 
 class syslog_t:
@@ -73,6 +78,7 @@ inline  void            operator () (int prio, const char* fmt, ...) const;
 };
 
 syslogbuf::syslogbuf(int prio):
+    std::stringbuf( std::ios_base::out ),
     m_prio( prio )
 {
 }
@@ -83,14 +89,28 @@ pubsync();
 m_prio = prio;
 }
 
+size_t syslogbuf::size() const
+{
+return pptr() - pbase();
+}
+
+bool syslogbuf::empty() const
+{
+return 0 == size();
+}
+
+void syslogbuf::clear()
+{
+setp( pbase(), epptr() );
+}
+
 int syslogbuf::sync()
 {
-if ( in_avail() )
+if ( !empty() )
     {
     sputc( '\0' );
-    syslog( m_prio, "%s", gptr() );
-    seekoff( 0, std::ios_base::beg, std::ios_base::in | std::ios_base::out );
-    setg( pbase(), pbase(), pbase() );
+    syslog( m_prio, "%s", pbase() );
+    clear();
     }
 return 0; //success
 }
